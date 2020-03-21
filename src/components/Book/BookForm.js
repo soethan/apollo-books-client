@@ -1,30 +1,10 @@
 import React, { useState } from 'react';
 import { graphql } from 'react-apollo';
 import * as compose from 'lodash.flowright';
-import { gql } from 'apollo-boost';
 import './style.scss';
 import { getBooksQuery } from '../../queries/bookQueries';
-
-const getAuthorsQuery = gql`{
-  findAllAuthors {
-    id
-    firstName
-    lastName
-  }
-}`;
-
-const addBookMutation = gql`mutation addBook($title: String!, $isbn: String!, $pageCount: Int, $author: ID!) {
-  newBook(title: $title, isbn: $isbn, pageCount: $pageCount, author: $author) {
-    id
-    title
-    author {
-      id
-      firstName
-      lastName
-    }
-    pageCount
-  }
-}`;
+import { getAuthorsQuery } from '../../queries/authorQueries';
+import { addBookMutation } from '../../mutation/bookMutations';
 
 const BookForm = props => {
   const [title, setTitle] = useState('');
