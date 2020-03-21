@@ -1,0 +1,88 @@
+.book-container {
+  display: flex;
+  flex-direction: column;
+  font-family: cursive;
+  font-weight: bold;
+  padding: 5px;
+
+  &.form {
+    text-align: left;
+
+    & h3 {
+      text-align: center;
+    }
+
+    button {
+      border: solid 1px #333;
+      padding: 5px;
+      font-family: cursive;
+      font-weight: bold;
+      width: 80px;
+      border-radius: 10px;
+      cursor: pointer;
+      float: right;
+    }
+
+    .row {
+      display: flex;
+      background-color: #fcf4a3;
+      padding: 10px;
+
+      &.btn-row {
+        display: block;
+      }
+
+      & label {
+        flex: 1;
+        text-align: right;
+        margin-right: 5px;
+      }
+
+      & input, select {
+        flex: 5;
+      }
+
+      &.last-row {
+        border-radius: 0 0 18px 18px;
+      }
+    }
+  }
+}
+
+.count {
+  line-height: 30px;
+  font-size: 12px;
+  border-radius: 50%;
+  background-color: #333;
+  color: #fff;
+  padding: 5px;
+}
+
+h3 {
+  background-color: #7b3f00;
+  border-radius: 18px 18px 0 0;
+  margin: 0;
+  padding: 5px;
+}
+
+.list {
+  margin: 0;
+  padding: 0;
+
+  li {
+    background-color: #ffffc2;
+    color: #5c3317;
+    cursor: pointer;
+    list-style: none;
+    padding: 5px 5px 5px 10px;
+    text-align: left;
+
+    &:nth-child(odd) {
+      background-color: #fdd017;
+    }
+
+    &:last-child {
+      border-radius: 0 0 18px 18px;
+    }
+  }
+}
