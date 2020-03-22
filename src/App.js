@@ -7,7 +7,6 @@ import './App.css';
 
 function App() {
   const [selectedBookId, setSelectedBookId] = useState();
-  const [modalIsOpen, setModalIsOpen] = useState(false);
   const [showAddForm, setShowAddForm] = useState(false);
   const [showDetailsForm, setShowDetailsForm] = useState(false);
 
@@ -16,34 +15,33 @@ function App() {
   });
 
   const handleAddClick = () => {
-    setModalIsOpen(true);
     setShowDetailsForm(false);
     setShowAddForm(true);
   }
 
   const handleBookSelect = (bookId) => {
     setSelectedBookId(bookId);
-    setModalIsOpen(true);
     setShowAddForm(false);
     setShowDetailsForm(true);
   }
 
   const handleCloseModal = () => {
-    setModalIsOpen(false);
+    showAddForm && setShowAddForm(false);
+    showDetailsForm && setShowDetailsForm(false);
   }
   return (
     <div className="App">
       <ApolloProvider client={client}>
         <Modal
           title={showAddForm ? "Book Form" : "Book Details"}
-          isOpen={modalIsOpen}
+          isOpen={showAddForm || showDetailsForm}
           onClose={handleCloseModal}
         >
           {showAddForm && <BookForm onClose={handleCloseModal} />}
           {showDetailsForm && selectedBookId && <BookDetails bookId={selectedBookId} />}
         </Modal>
         <div>
-          <button className="add-btn" onClick={handleAddClick}>Add</button>
+          <button className="add-btn" onClick={handleAddClick}>+</button>
         </div>
         <div>
           <BookList onBookSelect={handleBookSelect} />
