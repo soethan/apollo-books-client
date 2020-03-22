@@ -3,7 +3,15 @@
   flex-direction: column;
   font-family: cursive;
   font-weight: bold;
-  padding: 5px;
+
+  &.details {
+    background-color: #fcf4a3;
+    padding: 5px;
+
+    .row {
+      padding: 5px;
+    }
+  }
 
   &.form {
     text-align: left;
@@ -14,6 +22,7 @@
 
     button {
       border: solid 1px #333;
+      margin-left: 5px;
       padding: 5px;
       font-family: cursive;
       font-weight: bold;
@@ -40,10 +49,7 @@
 
       & input, select {
         flex: 5;
-      }
-
-      &.last-row {
-        border-radius: 0 0 18px 18px;
+        border: solid 1px #ccc;
       }
     }
   }

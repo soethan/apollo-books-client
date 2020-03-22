@@ -12,10 +12,15 @@ const BookDetails = props => {
     );
   } else {
     return (
-      <div className="book-container">
-        <h3>Book Details</h3>
-        <div>{book.title}</div>
-        <div>{book.isbn}</div>
+      <div className="book-container details">
+        <div className="row">
+          <label>Title: </label>
+          {book.title}
+        </div>
+        <div className="row">
+          <label>ISBN: </label>
+          {book.isbn}
+        </div>
       </div>
     );
   }

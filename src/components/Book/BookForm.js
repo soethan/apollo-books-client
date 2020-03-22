@@ -43,10 +43,12 @@ const BookForm = props => {
       refetchQueries: [{ query: getBooksQuery }]
     });
     resetForm();
+    props.onClose();
   };
 
   const handleCancel = () => {
     resetForm();
+    props.onClose();
   }
 
   const { loading, findAllAuthors: authors } = props.getAuthorsQuery;
@@ -57,7 +59,6 @@ const BookForm = props => {
   } else {
     return (
       <div className="book-container form">
-        <h3>Book Form</h3>
         <div className="row">
           <label>Title: </label>
           <input type="text" value={title} onChange={handleTitleChange} />
