@@ -44,7 +44,7 @@ function App() {
           <button className="add-btn" onClick={handleAddClick}>+</button>
         </div>
         <div>
-          <BookList onBookSelect={handleBookSelect} />
+          <BookList version={1} onBookSelect={handleBookSelect} />
         </div>
       </ApolloProvider>
     </div>

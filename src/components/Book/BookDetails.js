@@ -4,7 +4,6 @@ import './style.scss';
 import { getBookDetailsQuery } from '../../queries/bookQueries';
 
 const BookDetails = props => {
-  console.log(props);
   const { loading, findBookById: book } = props.data;
   if (loading) {
     return (

@@ -1,10 +1,25 @@
-import React from 'react';
-import { graphql } from 'react-apollo';
+import React, { useState, useEffect } from 'react';
+import { useApolloClient } from '@apollo/react-hooks';
+import { isEmpty } from 'lodash';
 import './style.scss';
 import { getBooksQuery } from '../../queries/bookQueries';
 
 const BookList = props => {
-  const { loading, countBooks: count, findAllBooks: books } = props.data;
+  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState({});
+
+  const client = useApolloClient();
+
+  useEffect(() => {
+    async function fetchData() {
+      let result = await client.query({
+        query: getBooksQuery
+      });
+      setLoading(result.loading);
+      setData(result.data);
+    }
+    fetchData();
+  }, [props.version]);
 
   const handleTitleClick = id => () => {
     props.onBookSelect(id);
@@ -13,7 +28,8 @@ const BookList = props => {
     return (
       <div>Loading...</div>
     );
-  } else {
+  } else if (!isEmpty(data)) {
+    const { countBooks: count, findAllBooks: books } = data;
     return (
       <div className="book-container">
         <h3><label>Book List</label> <label className="count">{count}</label></h3>
@@ -25,4 +41,4 @@ const BookList = props => {
   }
 }
 
-export default graphql(getBooksQuery)(BookList);
+export default React.memo(BookList);
