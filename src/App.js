@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import ApolloClient from 'apollo-boost';
-import { ApolloProvider } from 'react-apollo';
 import Modal, { setAppElement } from './components/Modal';
 import { BookForm, BookList, BookDetails } from './components/Book';
 import './App.css';
@@ -9,10 +7,6 @@ function App() {
   const [selectedBookId, setSelectedBookId] = useState();
   const [showAddForm, setShowAddForm] = useState(false);
   const [showDetailsForm, setShowDetailsForm] = useState(false);
-
-  const client = new ApolloClient({
-    uri: 'http://localhost:8080/graphql'
-  });
 
   const handleAddClick = () => {
     setShowDetailsForm(false);
@@ -31,22 +25,20 @@ function App() {
   }
   return (
     <div className="App">
-      <ApolloProvider client={client}>
-        <Modal
-          title={showAddForm ? "Book Form" : "Book Details"}
-          isOpen={showAddForm || showDetailsForm}
-          onClose={handleCloseModal}
-        >
-          {showAddForm && <BookForm onClose={handleCloseModal} />}
-          {showDetailsForm && selectedBookId && <BookDetails bookId={selectedBookId} />}
-        </Modal>
-        <div>
-          <button className="add-btn" onClick={handleAddClick}>+</button>
-        </div>
-        <div>
-          <BookList version={1} onBookSelect={handleBookSelect} />
-        </div>
-      </ApolloProvider>
+      <Modal
+        title={showAddForm ? "Book Form" : "Book Details"}
+        isOpen={showAddForm || showDetailsForm}
+        onClose={handleCloseModal}
+      >
+        {showAddForm && <BookForm onClose={handleCloseModal} />}
+        {showDetailsForm && selectedBookId && <BookDetails bookId={selectedBookId} />}
+      </Modal>
+      <div>
+        <button className="add-btn" onClick={handleAddClick}>+</button>
+      </div>
+      <div>
+        <BookList version={1} onBookSelect={handleBookSelect} />
+      </div>
     </div>
   );
 }

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { graphql } from 'react-apollo';
-import * as compose from 'lodash.flowright';
+import { useQuery, useMutation } from '@apollo/client';
 import './style.scss';
 import { getBooksQuery } from '../../queries/bookQueries';
 import { getAuthorsQuery } from '../../queries/authorQueries';
@@ -11,6 +10,9 @@ const BookForm = props => {
   const [isbn, setIsbn] = useState('');
   const [pageCount, setPageCount] = useState(0);
   const [author, setAuthor] = useState(0);
+
+  const { loading, data } = useQuery(getAuthorsQuery);
+  const [addBook] = useMutation(addBookMutation);
 
   const resetForm = () => {
     setTitle('');
@@ -33,7 +35,7 @@ const BookForm = props => {
   }
 
   const handleSave = () => {
-    props.addBookMutation({
+    addBook({
       variables: {
         title,
         isbn,
@@ -51,12 +53,12 @@ const BookForm = props => {
     props.onClose();
   }
 
-  const { loading, findAllAuthors: authors } = props.getAuthorsQuery;
   if (loading) {
     return (
       <div>Loading...</div>
     );
-  } else {
+  } else if (data) {
+    const { findAllAuthors: authors } = data;
     return (
       <div className="book-container form">
         <div className="row">
@@ -88,7 +90,4 @@ const BookForm = props => {
   }
 }
 
-export default compose(
-  graphql(getAuthorsQuery, { name: "getAuthorsQuery" }),
-  graphql(addBookMutation, { name: "addBookMutation" })
-)(BookForm);
+export default BookForm;

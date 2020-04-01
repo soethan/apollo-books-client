@@ -1,15 +1,22 @@
 import React from 'react';
-import { graphql } from 'react-apollo';
+import { useQuery } from '@apollo/client';
+
 import './style.scss';
 import { getBookDetailsQuery } from '../../queries/bookQueries';
 
 const BookDetails = props => {
-  const { loading, findBookById: book } = props.data;
+  const { loading, data } = useQuery(getBookDetailsQuery, {
+    variables: {
+      id: props.bookId
+    }
+  });
+
   if (loading) {
     return (
       <div>Loading...</div>
     );
-  } else {
+  } else if (data) {
+    const { findBookById: book } = data;
     return (
       <div className="book-container details">
         <div className="row">
@@ -25,12 +32,4 @@ const BookDetails = props => {
   }
 }
 
-export default graphql(getBookDetailsQuery, {
-  options: props => {
-    return {
-      variables: {
-        id: props.bookId
-      }
-    }
-  }
-})(BookDetails);
+export default BookDetails;

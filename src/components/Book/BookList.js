@@ -1,25 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { useApolloClient } from '@apollo/react-hooks';
+import React from 'react';
+import { useQuery } from '@apollo/client';
 import { isEmpty } from 'lodash';
 import './style.scss';
 import { getBooksQuery } from '../../queries/bookQueries';
 
 const BookList = props => {
-  const [loading, setLoading] = useState(true);
-  const [data, setData] = useState({});
-
-  const client = useApolloClient();
-
-  useEffect(() => {
-    async function fetchData() {
-      let result = await client.query({
-        query: getBooksQuery
-      });
-      setLoading(result.loading);
-      setData(result.data);
-    }
-    fetchData();
-  }, [props.version]);
+  const { loading, data } = useQuery(getBooksQuery);
 
   const handleTitleClick = id => () => {
     props.onBookSelect(id);
