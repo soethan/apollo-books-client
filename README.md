@@ -1,6 +1,8 @@
 https://www.freecodecamp.org/news/how-to-update-the-apollo-clients-cache-after-a-mutation-79a0df79b840/
 getAllBooks author must have id field, otherwise it will throw error runtime.
 
+https://www.apollographql.com/docs/react/api/apollo-client/#apolloclient-functions
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

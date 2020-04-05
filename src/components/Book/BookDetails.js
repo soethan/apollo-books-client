@@ -6,6 +6,7 @@ import { getBookDetailsQuery } from '../../queries/bookQueries';
 
 const BookDetails = props => {
   const { loading, data } = useQuery(getBookDetailsQuery, {
+    // fetchPolicy: 'network-only',
     variables: {
       id: props.bookId
     }
