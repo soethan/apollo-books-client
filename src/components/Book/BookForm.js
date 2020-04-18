@@ -9,7 +9,7 @@ const BookForm = props => {
   const [title, setTitle] = useState('');
   const [isbn, setIsbn] = useState('');
   const [pageCount, setPageCount] = useState(0);
-  const [author, setAuthor] = useState(0);
+  const [author, setAuthor] = useState("0");
 
   const { loading, data } = useQuery(getAuthorsQuery);
   const [addBook] = useMutation(addBookMutation);
@@ -20,6 +20,10 @@ const BookForm = props => {
     setPageCount(0);
     setAuthor(0);
   }
+
+  const valid = () => {
+    return title !== '' && isbn !== '' && pageCount > 0 && author !== '0';
+  };
 
   const handleTitleChange = e => {
     setTitle(e.target.value);
@@ -76,14 +80,14 @@ const BookForm = props => {
         <div className="row">
           <label>Author: </label>
           <select value={author} onChange={handleAuthorChange}>
-            <option>Select Author</option>
+            <option value="0">Select Author</option>
             {authors.map(item =>
               <option key={item.id} value={item.id}>{item.firstName + ' ' + item.lastName}</option>)}
           </select>
         </div>
         <div className="row btn-row last-row">
           <button onClick={handleCancel}>Cancel</button>
-          <button onClick={handleSave}>Save</button>
+          <button onClick={handleSave} disabled={!valid()}>Save</button>
         </div>
       </div>
     );
