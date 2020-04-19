@@ -53,21 +53,12 @@
         margin-right: 5px;
       }
 
-      & input, select {
+      & input {
         flex: 5;
         border: solid 1px #ccc;
       }
     }
   }
-}
-
-.count {
-  line-height: 30px;
-  font-size: 12px;
-  border-radius: 50%;
-  background-color: #333;
-  color: #fff;
-  padding: 5px;
 }
 
 h3 {

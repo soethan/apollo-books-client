@@ -2,6 +2,7 @@ import { gql } from '@apollo/client';
 
 const userSessionQuery = gql`
   query userSession {
+    userName @client
     isLoggedIn @client
   }
 `;

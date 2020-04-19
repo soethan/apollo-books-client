@@ -1,16 +1,13 @@
 import React, { useState } from 'react';
-import { useLazyQuery, useApolloClient } from '@apollo/client';
+import { useLazyQuery } from '@apollo/client';
 import './style.scss';
 import { loginQuery, userSessionQuery } from '../../queries/loginQueries';
 
 const LoginForm = props => {
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
+  const [login, { client, loading, data, error }] = useLazyQuery(loginQuery);
 
-  const client = useApolloClient();
-  const [login, queryResult] = useLazyQuery(loginQuery);
-  const { loading, data, error } = queryResult;
-  console.log('queryResult', queryResult);
   const valid = () => userName !== '' && password !== '';
 
   const handleUserNameChange = e => {

@@ -11,7 +11,7 @@ function App() {
   const [showLoginForm, setShowLoginForm] = useState(false);
   const [showAddForm, setShowAddForm] = useState(false);
   const [showDetailsForm, setShowDetailsForm] = useState(false);
-  const { data } = useQuery(userSessionQuery);
+  const { data: userSessionInfo } = useQuery(userSessionQuery);
 
   const handleLoginClick = () => {
     setShowLoginForm(true);
@@ -48,7 +48,7 @@ function App() {
     return '';
   }
 
-  const isModalOpen = () => (!data.isLoggedIn && showLoginForm) || showAddForm || showDetailsForm;
+  const isModalOpen = () => (!userSessionInfo.isLoggedIn && showLoginForm) || showAddForm || showDetailsForm;
 
   return (
     <div className="App">
@@ -63,7 +63,8 @@ function App() {
       </Modal>
       <div>
         <button className="add-btn" onClick={handleAddClick}>+</button>
-        <button className="login-btn" onClick={handleLoginClick} disabled={data.isLoggedIn}>Login</button>
+        {userSessionInfo.isLoggedIn && <label className="user-name">Welcome {userSessionInfo.userName}</label>}
+        {!userSessionInfo.isLoggedIn && <button className="login-btn" onClick={handleLoginClick}>Login</button>}
       </div>
       <div>
         <BookList version={1} onBookSelect={handleBookSelect} />
