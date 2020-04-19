@@ -1,4 +1,4 @@
-.book-container {
+.container {
   display: flex;
   flex-direction: column;
   font-family: cursive;
@@ -36,6 +36,12 @@
       display: flex;
       background-color: #fcf4a3;
       padding: 10px;
+
+      &.error {
+        color: #b22222;
+        display: block;
+        text-align: center;
+      }
 
       &.btn-row {
         display: block;
@@ -75,21 +81,4 @@ h3 {
 .list {
   margin: 0;
   padding: 0;
-
-  li {
-    background-color: #ffffe0;
-    color: #5c3317;
-    cursor: pointer;
-    list-style: none;
-    padding: 5px 5px 5px 10px;
-    text-align: left;
-
-    &:nth-child(odd) {
-      background-color: #ffff99;
-    }
-
-    &:last-child {
-      border-radius: 0 0 18px 18px;
-    }
-  }
 }

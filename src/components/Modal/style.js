@@ -22,6 +22,7 @@ const style = {
   },
   title: {
     backgroundColor: '#7b3f00',
+    color: '#fff',
     margin: 0,
     padding: '5px'
   }
