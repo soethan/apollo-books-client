@@ -1,3 +1,48 @@
+import React, { useState, useMemo } from 'react';
+
+const ProductList = () => {
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const products = [
+    'Apple',
+    'Banana',
+    'Orange',
+    'Mango',
+    'Pineapple',
+    'Watermelon',
+    'Grapes',
+    'Papaya',
+    'Strawberry',
+  ];
+
+  const filteredProducts = useMemo(() => {
+    console.log('Filtering products...');
+    return products.filter((product) =>
+      product.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  }, [searchTerm]); // Recalculate only when searchTerm changes
+
+  return (
+    <div>
+      <input
+        type="text"
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        placeholder="Search for a product"
+      />
+      <ul>
+        {filteredProducts.map((product) => (
+          <li key={product}>{product}</li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+export default ProductList;
+
+
+
 1). Container Component vs Presentation(Pure) Component
 Container Components are responsible for handling logic, managing state, and interacting with APIs or stores, while Presentation (or Pure) Components focus purely on rendering UI based on the data passed to them via props. This separation helps in keeping your components clean and modular.
 
