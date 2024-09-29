@@ -1,3 +1,35 @@
+// UserList.js
+import React from "react";
+
+// Define the UserList component
+const UserList = ({ users }) => {
+  return (
+    <div className="user-list">
+      <ul>
+        {users.map((user) => (
+          // Use the unique user.id as the key
+          <li key={user.id} className="user-item">
+            <UserItem user={user} />
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+// Define a reusable UserItem component
+const UserItem = ({ user }) => (
+  <div>
+    <h4>{user.name}</h4>
+    <p>{user.email}</p>
+  </div>
+);
+
+export default UserList;
+
+
+
+
 import React, { useState, useCallback } from 'react';
 
 const Child = React.memo(({ increment }) => {
