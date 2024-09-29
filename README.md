@@ -1,3 +1,28 @@
+import React, { useState, useCallback } from 'react';
+
+const Child = React.memo(({ increment }) => {
+  console.log('Child re-rendered');
+  return <button onClick={increment}>Increment</button>;
+});
+
+const Parent = () => {
+  const [count, setCount] = useState(0);
+
+  const increment = useCallback(() => setCount((prevCount) => prevCount + 1), []);
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <Child increment={increment} />
+    </div>
+  );
+};
+
+export default Parent;
+
+
+
+
 import React, { useState, useMemo } from 'react';
 
 const ProductList = () => {
