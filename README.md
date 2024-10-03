@@ -1,3 +1,15 @@
+Development Mode Behavior:
+
+In development mode, React provides detailed error messages and overlays to make it easier for you to debug.
+React may not fully catch errors in the Error Boundary during development because it's focused on providing rich debug information to help you trace the issue.
+The errors will appear in the console, and React may show an "error overlay" with the error message and stack trace.
+Production Mode Behavior:
+
+In production, Error Boundaries work as expected, catching the errors and showing the fallback UI without exposing unnecessary error details.
+The fallback UI (Something went wrong.) will appear when a component error occurs, preventing the entire app from crashing.
+
+////////////
+
 import React, { useState, useEffect } from 'react';
 
 // Wrap DataComponent with the withLoading HOC
