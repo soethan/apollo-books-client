@@ -1,3 +1,29 @@
+import React, { useState, useEffect } from 'react';
+
+// Wrap DataComponent with the withLoading HOC
+const DataComponentWithLoading = withLoading(DataComponent);
+
+function App() {
+  const [isLoading, setIsLoading] = useState(true);
+  const [data, setData] = useState([]);
+
+  // Simulate data fetching
+  useEffect(() => {
+    setTimeout(() => {
+      setData(['Item 1', 'Item 2', 'Item 3']);
+      setIsLoading(false);
+    }, 2000); // Simulating a 2-second loading time
+  }, []);
+
+  return (
+    <div>
+      {/* Render the component with loading behavior */}
+      <DataComponentWithLoading isLoading={isLoading} data={data} />
+    </div>
+  );
+}
+///////////////////
+
 // UserList.js
 import React from "react";
 
