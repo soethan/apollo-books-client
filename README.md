@@ -1,3 +1,158 @@
+components/TodoList/index.js
+
+import React, { useState, useCallback } from 'react';
+import './TodoList.css';
+
+const TodoList = () => {
+  const [todos, setTodos] = useState([
+    { task: 'Learn React' },
+    { task: 'Learn Cassandra' },
+    { task: 'Learn Kubernetes' }
+  ]);
+  const [newTask, setNewTask] = useState('');
+
+  const addTodo = useCallback(() => {
+    if (newTask.trim()) {
+      setTodos((prevTodos) => [...prevTodos, { task: newTask }]);
+      setNewTask(''); // Clear the input field after adding the task
+    }
+  }, [newTask]);
+
+  const deleteTodo = useCallback((index) => {
+    setTodos((prevTodos) => prevTodos.filter((_, i) => i !== index));
+  }, []);
+
+  // Sort tasks alphabetically when rendering
+  const sortedTodos = [...todos].sort((a, b) => a.task.localeCompare(b.task));
+
+  return (
+    <div>
+      <h2>Todo List</h2>
+      <div className="add-todo">
+        <input 
+          type="text" 
+          value={newTask} 
+          onChange={(e) => setNewTask(e.target.value)} 
+          placeholder="Enter a new task" 
+        />
+        <button onClick={addTodo}>Add Todo</button>
+      </div>
+      <div className="todo-list">
+        <div className="todo-header">
+          <div>Task</div>
+          <div>Action</div>
+        </div>
+        {sortedTodos.map((todo, index) => (
+          <div key={index} className="todo-item">
+            <div>{todo.task}</div>
+            <button onClick={() => deleteTodo(index)}>Delete</button>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default TodoList;
+
+components/TodoList/index2.js
+
+import React, { useState, useCallback } from 'react';
+import { v4 as uuidv4 } from 'uuid'; // Using uuid for generating unique ids
+import './TodoList.css';
+
+const TodoList = () => {
+  const [todos, setTodos] = useState([
+    { id: uuidv4(), task: 'Learn React' },
+    { id: uuidv4(), task: 'Learn Cassandra' },
+    { id: uuidv4(), task: 'Learn Kubernetes' }
+  ]);
+  const [newTask, setNewTask] = useState('');
+
+  const addTodo = useCallback(() => {
+    if (newTask.trim()) {
+      setTodos((prevTodos) => [...prevTodos, { id: uuidv4(), task: newTask }]);
+      setNewTask(''); // Clear the input field after adding the task
+    }
+  }, [newTask]);
+
+  const deleteTodo = useCallback((id) => {
+    setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
+  }, []);
+
+  // Sort tasks alphabetically when rendering
+  const sortedTodos = [...todos].sort((a, b) => a.task.localeCompare(b.task));
+
+  return (
+    <div>
+      <h2>Todo List</h2>
+      <div className="add-todo">
+        <input 
+          type="text" 
+          value={newTask} 
+          onChange={(e) => setNewTask(e.target.value)} 
+          placeholder="Enter a new task" 
+        />
+        <button onClick={addTodo}>Add Todo</button>
+      </div>
+      <div className="todo-list">
+        <div className="todo-header">
+          <div>Task</div>
+          <div>Action</div>
+        </div>
+        {sortedTodos.map((todo) => (
+          <div key={todo.id} className="todo-item">
+            <div>{todo.task}</div>
+            <button onClick={() => deleteTodo(todo.id)}>Delete</button>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default TodoList;
+
+components/TodoList/TodoList.css
+
+.todo-list {
+    display: table;
+    width: 100%;
+    margin-top: 10px;
+  }
+  
+  .todo-header, .todo-item {
+    display: table-row;
+  }
+  
+  .todo-header div, .todo-item div {
+    display: table-cell;
+    padding: 10px;
+    border: 1px solid #ccc;
+  }
+  
+  .todo-header {
+    font-weight: bold;
+    background-color: #f1f1f1;
+  }
+  
+  .todo-item button {
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .todo-item button:hover {
+    background-color: #0056b3;
+  }
+  
+
+
+////////////////////////////////////////////////////////////////////////
+
 Development Mode Behavior:
 
 In development mode, React provides detailed error messages and overlays to make it easier for you to debug.
